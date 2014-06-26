@@ -539,7 +539,7 @@
 						<key>customClass</key>
 						<string>Gameplay</string>
 						<key>displayName</key>
-						<string>Gameplay</string>
+						<string>level area</string>
 						<key>memberVarAssignmentName</key>
 						<string>_levelNode</string>
 						<key>memberVarAssignmentType</key>
@@ -824,7 +824,7 @@
 			<key>name</key>
 			<string>Default Timeline</string>
 			<key>offset</key>
-			<real>6.6328125</real>
+			<real>6.4453010559082031</real>
 			<key>position</key>
 			<real>10</real>
 			<key>resolution</key>
