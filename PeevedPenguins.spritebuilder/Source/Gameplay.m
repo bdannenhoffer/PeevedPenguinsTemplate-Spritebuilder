@@ -49,6 +49,13 @@
     }
 }
 
+- (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    // whenever touches move, update the position of the mouseJointNode to the touch position
+    CGPoint touchLocation = [touch locationInNode:_contentNode];
+    _mouseJointNode.position = touchLocation;
+}
+
 -(void) touchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
     // when touches end, meaning the user releases their finger, release the catapult
