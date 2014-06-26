@@ -335,8 +335,6 @@
 	_target = nil;
 	[super stop];
 }
-
-
 @end
 
 
