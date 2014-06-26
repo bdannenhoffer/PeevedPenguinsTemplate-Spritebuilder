@@ -21,6 +21,8 @@ static const float MIN_SPEED = 5.f;
     CCPhysicsJoint *_mouseJoint;
     CCNode *_currentPenguin;
     CCPhysicsJoint *_penguinCatapultJoint;
+    CCAction *_followPenguin;
+
 }
 
 // is called when CCB file has completed loading
@@ -104,8 +106,8 @@ static const float MIN_SPEED = 5.f;
         _currentPenguin.physicsBody.allowsRotation = TRUE;
         
         // follow the flying penguin
-        CCActionFollow *follow = [CCActionFollow actionWithTarget:_currentPenguin worldBoundary:self.boundingBox];
-        [_contentNode runAction:follow];
+        _followPenguin = [CCActionFollow actionWithTarget:_currentPenguin worldBoundary:self.boundingBox];
+        [_contentNode runAction:_followPenguin];
     }
 }
 
@@ -182,6 +184,14 @@ static const float MIN_SPEED = 5.f;
         [self nextAttempt];
         return;
     }
+}
+
+- (void)nextAttempt {
+    _currentPenguin = nil;
+    [_contentNode stopAction:_followPenguin];
+    
+    CCActionMoveTo *actionMoveTo = [CCActionMoveTo actionWithDuration:1.f position:ccp(0, 0)];
+    [_contentNode runAction:actionMoveTo];
 }
 
 @end
