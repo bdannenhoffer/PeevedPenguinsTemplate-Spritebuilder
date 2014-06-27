@@ -7,6 +7,7 @@
 //
 
 #import "Gameplay.h"
+#import "Penguin.h"
 #import "CCPhysics+ObjectiveChipmunk.h"
 
 static const float MIN_SPEED = 5.f;
@@ -19,7 +20,7 @@ static const float MIN_SPEED = 5.f;
     CCNode *_pullbackNode;
     CCNode *_mouseJointNode;
     CCPhysicsJoint *_mouseJoint;
-    CCNode *_currentPenguin;
+    Penguin *_currentPenguin;
     CCPhysicsJoint *_penguinCatapultJoint;
     CCAction *_followPenguin;
 
@@ -57,8 +58,7 @@ static const float MIN_SPEED = 5.f;
         _mouseJoint = [CCPhysicsJoint connectedSpringJointWithBodyA:_mouseJointNode.physicsBody bodyB:_catapultArm.physicsBody anchorA:ccp(0, 0) anchorB:ccp(34, 138) restLength:0.f stiffness:3000.f damping:150.f];
         
         // create a penguin from the ccb-file
-        _currentPenguin = [CCBReader load:@"Penguin"];
-        // initially position it on the scoop. 34,138 is the position in the node space of the _catapultArm
+        _currentPenguin = (Penguin*)[CCBReader load:@"Penguin"];        // initially position it on the scoop. 34,138 is the position in the node space of the _catapultArm
         CGPoint penguinPosition = [_catapultArm convertToWorldSpace:ccp(34, 138)];
         // transform the world position to the node space to which the penguin will be added (_physicsNode)
         _currentPenguin.position = [_physicsNode convertToNodeSpace:penguinPosition];
@@ -108,6 +108,8 @@ static const float MIN_SPEED = 5.f;
         // follow the flying penguin
         _followPenguin = [CCActionFollow actionWithTarget:_currentPenguin worldBoundary:self.boundingBox];
         [_contentNode runAction:_followPenguin];
+        
+        _currentPenguin.launched = TRUE;
     }
 }
 
@@ -165,7 +167,8 @@ static const float MIN_SPEED = 5.f;
 
 - (void)update:(CCTime)delta
 {
-    // if speed is below minimum speed, assume this attempt is over
+    if(_currentPenguin.launched)
+    {// if speed is below minimum speed, assume this attempt is over
     if (ccpLength(_currentPenguin.physicsBody.velocity) < MIN_SPEED){
         [self nextAttempt];
         return;
@@ -184,6 +187,7 @@ static const float MIN_SPEED = 5.f;
         [self nextAttempt];
         return;
     }
+}
 }
 
 - (void)nextAttempt {
