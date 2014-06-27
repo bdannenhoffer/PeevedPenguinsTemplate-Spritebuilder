@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>6</integer>
+	<integer>7</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -112,7 +112,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>PeevedPenguinsAssets/menubackground.png</string>
+							<string>PeevedPenguinsIPadAssets/PeevedPenguinsAssets/menubackground.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -257,7 +257,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>PeevedPenguinsAssets/button.png</string>
+							<string>PeevedPenguinsIPadAssets/PeevedPenguinsAssets/button.png</string>
 						</array>
 					</dict>
 					<dict>
